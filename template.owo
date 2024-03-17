@@ -1,0 +1,15 @@
+// OwO varwiabwe decwawation
+vaw nyame = "wowld"; // UwU
+
+// UwU Function decwawation
+functiwoon gweet(nyame) {
+    wetuwn "Hewwo, " + nyame + "!"; // ^w^
+}
+
+// Owo using a contwol stwucture
+if (nyame.wength > 0) {
+    consowe.wog(gweet(nyame)); // :3
+} ewse {
+    consowe.wog("No nyame pwovided"); // T_T
+}
+
