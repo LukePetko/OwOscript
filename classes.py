@@ -11,13 +11,13 @@ class FunctionDeclaration:
         self.args = args
         self.body = body
     def __str__(self) -> str:
-        return f'name: {self.name}, args: {self.args}, body: {self.body}'
+        return f'Function - name: {self.name}, args: {self.args}, body: {self.body}'
 
 class ReturnStatement:
     def __init__(self, statement) -> None:
         self.statement = statement
     def __str__(self) -> str:
-        return f'statement {self.statement}'
+        return f'Return statement - {self.statement}'
 
 class BinaryOperation:
     def __init__(self, left, right, operation) -> None:
@@ -25,23 +25,23 @@ class BinaryOperation:
         self.right = right
         self.operation = operation
     def __str__(self) -> str:
-        return f'left: {self.left}, right: {self.right}, operation: {self.operation}'
+        return f'Binary Op - left: {self.left}, right: {self.right}, operation: {self.operation}'
 
 class NumberLiteral:
     def __init__(self, value) -> None:
         self.value = value
     def __str__(self) -> str:
-        return f'value {self.value}'
+        return f'Number - {self.value}'
         
 class StringLiteral:
     def __init__(self, value) -> None:
         self.value = value
     def __str__(self) -> str:
-        return f'value {self.value}'
+        return f'String - {self.value}'
 
 class VariableReference:
     def __init__(self, value) -> None:
         self.value = value
     def __str__(self) -> str:
-        return f'value {self.value}'
+        return f'Variable - {self.value}'
 

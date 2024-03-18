@@ -11,7 +11,7 @@ def parse_variable_declaration(tokens):
     if assign[0] != 'ASSIGN':
         raise SyntaxError(f'Expected =, got {assign[1]}')
 
-    value = parse_binary_expression(tokens)
+    value = parse_expression(tokens)
 
     return VariableDeclaration(name, value)
 
@@ -58,15 +58,37 @@ def parse_function_body(tokens):
             if token[1] == 'vaw':
                 children.append(parse_variable_declaration(tokens))
             elif token[1] == 'wetuwn':
-                children.append(ReturnStatement(parse_binary_expression(tokens)))
+                children.append(ReturnStatement(parse_expression(tokens)))
         elif token[0] == 'COMMENT':
             continue
         else:
             continue
 
-def parse_binary_expression(tokens):
-    left = next(tokens)
+def parse_expression(tokens):
+    token = next(tokens)
+    try:
+        nextToken = next(tokens)
+    except StopIteration:
+        match token[0]:
+            case "NUMBER":
+                return NumberLiteral(token)
+            case "STRING":
+                return StringLiteral(token)
+            case "IDENT":
+                return VariableReference(token)
+        raise SyntaxError(f'Expected number, string or variable, got {token[1]}')
+        
+    
+    match nextToken[0]:
+        case "OPERATOR":
+            parse_binary_expression(tokens, token, nextToken)
+        case "LPAREN":
+            parse_function_execution(tokens, token)
 
+
+
+
+def parse_binary_expression(tokens, left, operator):
     if left[0] not in ["NUMBER", "STRING", "IDENT"]:
         raise SyntaxError(f'Expected string, number or variable, got {left[1]}')
 
@@ -78,23 +100,16 @@ def parse_binary_expression(tokens):
         case "IDENT":
             left = VariableReference(left)
 
-    operation = None
-    try:
-        operation = next(tokens)
-    except StopIteration:
+    if operator[0] in ["COMMENT", "SEMI"]:
         return left
 
-
-    if operation[0] in ["COMMENT", "SEMI"]:
-        return left
-
-    if operation[0] != "OPERATOR":
-        raise SyntaxError(f'Expected operation, got {operation[1]}')
+    if operator[0] != "OPERATOR":
+        raise SyntaxError(f'Expected operator, got {operator[1]}')
 
     right = next(tokens)
 
     if right[0] not in ["NUMBER", "STRING", "IDENT"]:
-        raise SyntaxError(f'Expected operation, got {right[1]}')
+        raise SyntaxError(f'Expected operator, got {right[1]}')
 
     match right[0]:
         case "NUMBER":
@@ -104,7 +119,23 @@ def parse_binary_expression(tokens):
         case "IDENT":
             right = VariableReference(right)
 
-    return BinaryOperation(left, right, operation)
+    return BinaryOperation(left, right, operator)
+
+def parse_function_execution(tokens, name):
+    args = []
+
+    while True:
+        arg = next(tokens)
+
+        if arg[0] == 'RPAREN':
+            break
+        elif arg[0] == 'COMMA':
+            continue
+        else:
+            print(arg)
+            args.append(arg)
+
+
 
 def parse(tokens):
     ast = []

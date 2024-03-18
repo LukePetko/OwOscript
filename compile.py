@@ -13,5 +13,5 @@ with open("testfile.owo", "r") as f:
 
 ast = parse(tokens)
 
-print(ast)
+print(ast[3])
 
