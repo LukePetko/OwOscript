@@ -2,14 +2,15 @@
 vaw nyame = "wowld"; // UwU
 
 // UwU Function decwawation
-functiwoon gweet(nyame) {
+functiwoon gweet(nyame, uwu) {
+    vaw owo = uwu
     wetuwn "Hewwo, " + nyame + "!"; // ^w^
 }
 
 // Owo using a contwol stwucture
-if (nyame == "UwU") {
-    pwint(gweet(nyame)); // :3
-} ewse {
-    pwint("No nyame pwovided"); // T_T
-}
+// if (nyame == "UwU") {
+//    pwint(gweet(nyame)); // :3
+// } ewse {
+//     pwint("No nyame pwovided"); // T_T
+// }
 

@@ -1,5 +1,5 @@
 import re
-from classes import VariableDeclaration
+from classes import VariableDeclaration, FunctionDeclaration
 
 token_specification = [
     ('COMMENT',  r'//.*'),                # Comment
@@ -70,16 +70,71 @@ def parse_variable_declaration(tokens):
 
     return VariableDeclaration(name, value)
 
+def parse_function_declaration(tokens):
+    name = next(tokens)
+
+    if name[0] != 'IDENT':
+        raise SyntaxError(f'Expected identifier, got {name[1]}')
+
+    left_paren = next(tokens)
+
+    if left_paren[0] != 'LPAREN':
+        raise SyntaxError(f'Expected (, got {left_paren[1]}')
+
+    args = []
+
+    while True:
+        arg = next(tokens)
+
+        if arg[0] == 'RPAREN':
+            break
+        elif arg[0] == 'COMMA':
+            continue
+        else:
+            args.append(arg)
+
+    left_brace = next(tokens)
+
+    if left_brace[0] != 'LBRACE':
+        raise SyntaxError(f'Expected {{, got {left_brace[1]}')
+
+    body = parse_function_body(tokens)
+
+    return FunctionDeclaration(name, args, body)
+    
+def parse_function_body(tokens):
+    children = []
+    while True:
+        token = next(tokens)
+
+        if token[0] == 'RBRACE':
+            return children
+        elif token[0] == 'KEYWORD':
+            if token[1] == 'vaw':
+                children.append(parse_variable_declaration(tokens))
+        elif token[0] == 'COMMENT':
+            continue
+        else:
+            print(token)
 
 
-# with open("template.owo", "r") as f:
-#     tokens = lexer(f.read())
-#     print(tokens)
 
-tokens = iter(lexer("vaw x = 5; // this is a comment\nvaw y = 10;"))
+
+
+tokens = []
+
+with open("template.owo", "r") as f:
+    tokens = iter(lexer(f.read()))
+
+# tokens = iter(lexer("vaw x = 5; // this is a comment\nvaw y = 10;"))
 
 for token in tokens:
-    print(token)
-    if token[0] == "KEYWORD" and token[1] == "vaw":
-        print(parse_variable_declaration(tokens))
+    if token[0] == "KEYWORD":
+        match(token[1]):
+            case "vaw":
+                print(parse_variable_declaration(tokens))
+            case "functiwoon":
+                print(parse_function_declaration(tokens))
+    elif token[0] == "COMMENT":
+        continue
 
