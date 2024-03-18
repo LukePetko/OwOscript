@@ -3,8 +3,8 @@ vaw nyame = "wowld"; // UwU
 
 // UwU Function decwawation
 functiwoon gweet(nyame, uwu) {
-    vaw owo = uwu
-    wetuwn "Hewwo, " + nyame + "!"; // ^w^
+    vaw owo = uwu + 1
+    wetuwn "Hewwo, " + nyame; // ^w^
 }
 
 // Owo using a contwol stwucture

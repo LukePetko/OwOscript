@@ -1,0 +1,7 @@
+vaw uwu = "UwU";
+vaw owo = "OwO";
+
+functiwoon uwu_owo(uwu, owo) {
+    vaw owo_uwu = uwu + owo
+    wetuwn owo_uwu;
+}
