@@ -1,5 +1,13 @@
 import re
 
+class VariableDeclaration:
+    def __init__(self, name, value) -> None:
+        self.name = name
+        self.value = value
+    def __str__(self) -> str:
+        return f'name: {self.name}, value: {self.value}'
+        
+
 token_specification = [
     ('COMMENT',  r'//.*'),                # Comment
     ('NUMBER',   r'\d+(\.\d*)?'),         # Integer or decimal NUMBER
@@ -52,6 +60,20 @@ def lexer(code):
     return tokens
 
 
+def parse_variable_declaration(tokens):
+    name = next(tokens)
+
+    if name[0] != 'IDENT':
+        raise SyntaxError(f'Expected identifier, got {name[1]}')
+
+    assign = next(tokens)
+
+    if assign[0] != 'ASSIGN':
+        raise SyntaxError(f'Expected =, got {assign[1]}')
+
+    value = next(tokens) # TODO parse expressions
+
+    return VariableDeclaration(name, value)
 
 
 
@@ -59,6 +81,10 @@ def lexer(code):
 #     tokens = lexer(f.read())
 #     print(tokens)
 
-tokens = lexer("vaw x = 5; // this is a comment\nvaw y = 10;")
+tokens = iter(lexer("vaw x = 5; // this is a comment\nvaw y = 10;"))
 
-print(tokens)
+for token in tokens:
+    print(token)
+    if token[0] == "KEYWORD" and token[1] == "vaw":
+        print(parse_variable_declaration(tokens))
+
