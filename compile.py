@@ -1,24 +1,19 @@
 import re
-
-class VariableDeclaration:
-    def __init__(self, name, value) -> None:
-        self.name = name
-        self.value = value
-    def __str__(self) -> str:
-        return f'name: {self.name}, value: {self.value}'
-        
+from classes import VariableDeclaration
 
 token_specification = [
     ('COMMENT',  r'//.*'),                # Comment
     ('NUMBER',   r'\d+(\.\d*)?'),         # Integer or decimal NUMBER
     ('IDENT',    r'[a-zA-Z_]\w*'),        # Identifiers
     ('STRING',   r'\".*?\"'),             # String
+    ('EQ',       r'=='),                  # Equality
     ('ASSIGN',   r'='),                   # Assersion
     ('OPERATOR', r'[\+\-\*/]'),           # Math operations
     ('LPAREN',   r'\('),                  # Left Parenthesis
     ('RPAREN',   r'\)'),                  # Right Parenthesis
     ('LBRACE',   r'\{'),                  # Left curly brace
     ('RBRACE',   r'\}'),                  # Right curly brace
+    ('COMMA',    r','),                   # Comma
     ('NEWLINE',  r'\n'),                  # Line endings
     ('SKIP',     r'[ \t;]+'),             # Skip over spaces and tabs
     ('MISMATCH', r'.')                    # Any other character
