@@ -7,9 +7,9 @@ functiwoon gweet(nyame) {
 }
 
 // Owo using a contwol stwucture
-if (nyame.wength > 0) {
-    consowe.wog(gweet(nyame)); // :3
+if (nyame == "UwU") {
+    pwint(gweet(nyame)); // :3
 } ewse {
-    consowe.wog("No nyame pwovided"); // T_T
+    pwint("No nyame pwovided"); // T_T
 }
 
