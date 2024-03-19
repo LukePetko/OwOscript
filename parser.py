@@ -64,8 +64,9 @@ def parse_function_body(tokens):
         else:
             continue
 
-def parse_expression(tokens):
-    token = next(tokens)
+def parse_expression(tokens, token = None):
+    if token == None:
+        token = next(tokens)
     try:
         nextToken = next(tokens)
     except StopIteration:
@@ -78,14 +79,20 @@ def parse_expression(tokens):
                 return VariableReference(token)
         raise SyntaxError(f'Expected number, string or variable, got {token[1]}')
         
-    
     match nextToken[0]:
+        case "SEMI":
+            # separate stuff like this
+            match token[0]:
+                case "NUMBER":
+                    return NumberLiteral(token)
+                case "STRING":
+                    return StringLiteral(token)
+                case "IDENT":
+                    return VariableReference(token)
         case "OPERATOR":
-            parse_binary_expression(tokens, token, nextToken)
+            return parse_binary_expression(tokens, token, nextToken)
         case "LPAREN":
-            parse_function_execution(tokens, token)
-
-
+            return parse_function_execution(tokens, token)
 
 
 def parse_binary_expression(tokens, left, operator):
@@ -132,8 +139,16 @@ def parse_function_execution(tokens, name):
         elif arg[0] == 'COMMA':
             continue
         else:
-            print(arg)
-            args.append(arg)
+            match arg[0]:
+                case "NUMBER":
+                    args.append(NumberLiteral(arg))
+                case "STRING":
+                    args.append(StringLiteral(arg))
+                case "IDENT":
+                    args.append(VariableReference(arg))
+
+
+    return FunctionExecution(name, args)
 
 
 
@@ -149,6 +164,8 @@ def parse(tokens):
                     ast.append(parse_function_declaration(tokens))
         elif token[0] == "COMMENT":
             continue
+        elif token[0] == "IDENT":
+            ast.append(parse_expression(tokens, token))
 
     return ast
 

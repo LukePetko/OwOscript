@@ -7,3 +7,6 @@ functiwoon uwu_owo(uwu, owo) {
 }
 
 vaw wesuwt = uwu_owo(uwu, owo)
+pwint(wesuwt)
+wesuwt = "^^"
+

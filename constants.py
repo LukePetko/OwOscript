@@ -21,7 +21,6 @@ keyword_specification = [
     "vaw",
     "functiwoon",
     "wetuwn",
-    "pwint",
     "if",
     "ewse"
 ]
