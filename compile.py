@@ -1,6 +1,7 @@
 from classes import AST
 from lexer import lexer
 from parser import parse
+from semantic_analysis import semantic_analysis
 
 ast = []
 
@@ -14,5 +15,5 @@ with open("testfile.owo", "r") as f:
 
 ast = AST(parse(tokens))
 
-print(ast)
+semantic_analysis(ast)
 

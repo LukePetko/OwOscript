@@ -1,6 +1,7 @@
 import json 
 
 class AST:
+    type = 'AST'
     def __init__(self, body) -> None:
         self.body = body
     def to_dict(self):
@@ -13,6 +14,7 @@ class AST:
         return json.dumps(self.to_dict())
 
 class VariableDeclaration:
+    type = 'VariableDeclaration'
     def __init__(self, name, value) -> None:
         self.name = name[1]
         self.value = value
@@ -27,6 +29,7 @@ class VariableDeclaration:
         return json.dumps(self.to_dict())
 
 class VariableAssignment:
+    type = 'VariableAssignment'
     def __init__(self, name, value) -> None:
         self.name = name[1]
         self.value = value
@@ -41,6 +44,7 @@ class VariableAssignment:
 
 
 class FunctionDeclaration:
+    type = 'FunctionDeclaration'
     def __init__(self, name, args, body) -> None:
         self.name = name[1]
         self.args = args
@@ -58,6 +62,7 @@ class FunctionDeclaration:
         return json.dumps(self.to_dict())
 
 class ReturnStatement:
+    type = 'ReturnStatement'
     def __init__(self, statement) -> None:
         self.statement = statement
     def to_dict(self):
@@ -69,6 +74,7 @@ class ReturnStatement:
         return json.dumps(self.to_dict())
 
 class BinaryOperation:
+    type = 'BinaryOperation'
     def __init__(self, left, right, operation) -> None:
         self.left = left
         self.right = right
@@ -84,6 +90,7 @@ class BinaryOperation:
         return json.dumps(self.to_dict())
 
 class FunctionExecution:
+    type = 'FunctionExecution'
     def __init__(self, name, args) -> None:
         self.name = name[1]
         self.args = args
@@ -99,6 +106,7 @@ class FunctionExecution:
         
 
 class NumberLiteral:
+    type = 'NumberLiteral'
     def __init__(self, value) -> None:
         self.value = value[1]
     def to_dict(self):
@@ -110,6 +118,7 @@ class NumberLiteral:
         return json.dumps(self.to_dict())
         
 class StringLiteral:
+    type = 'StringLiteral'
     def __init__(self, value) -> None:
         self.value = value[1]
     def to_dict(self):
@@ -121,6 +130,7 @@ class StringLiteral:
         return json.dumps(self.to_dict())
 
 class VariableReference:
+    type = 'VariableReference'
     def __init__(self, value) -> None:
         self.value = value.to_dict() if hasattr(value, 'to_dict') else value
     def to_dict(self):
