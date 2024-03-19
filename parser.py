@@ -15,6 +15,17 @@ def parse_variable_declaration(tokens):
 
     return VariableDeclaration(name, value)
 
+def parse_variable_assignment(tokens, name, assign):
+    if name[0] != 'IDENT':
+        raise SyntaxError(f'Expected identifier, got {name[1]}')
+
+    if assign[0] != 'ASSIGN':
+        raise SyntaxError(f'Expected =, got {assign[1]}')
+
+    value = parse_expression(tokens)
+
+    return VariableAssignment(name, value)
+
 def parse_function_declaration(tokens):
     name = next(tokens)
 
@@ -36,7 +47,11 @@ def parse_function_declaration(tokens):
         elif arg[0] == 'COMMA':
             continue
         else:
-            args.append(arg)
+            match arg[0]:
+                case "NUMBER" | "STRING":
+                    raise SyntaxError(f'Expected identifier, got {arg[1]}')
+                case "IDENT":
+                    args.append(VariableReference(arg))
 
     left_brace = next(tokens)
 
@@ -93,6 +108,8 @@ def parse_expression(tokens, token = None):
             return parse_binary_expression(tokens, token, nextToken)
         case "LPAREN":
             return parse_function_execution(tokens, token)
+        case "ASSIGN":
+            return parse_variable_assignment(tokens, token, nextToken)
 
 
 def parse_binary_expression(tokens, left, operator):

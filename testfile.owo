@@ -2,11 +2,13 @@ vaw uwu = "UwU";
 vaw owo = "OwO";
 
 functiwoon uwu_owo(uwu, owo) {
-    vaw owo_uwu = uwu + owo
+    vaw owo_uwu = uwu + owo;
     wetuwn owo_uwu;
 }
 
-vaw wesuwt = uwu_owo(uwu, owo)
-pwint(wesuwt)
-wesuwt = "^^"
+vaw wesuwt = uwu_owo(uwu, "owo");
+pwint(wesuwt);
+wesuwt = "^^";
+
+vaw numbew = 1;
 
