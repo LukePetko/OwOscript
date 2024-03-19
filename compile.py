@@ -1,6 +1,6 @@
-from classes import AST
+from parser.classes import AST
 from lexer import lexer
-from parser import parse
+from parser.parser import parse
 from semantic_analysis import semantic_analysis
 
 ast = []

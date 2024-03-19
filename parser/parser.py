@@ -1,4 +1,4 @@
-from classes import *
+from parser.classes import *
 
 def parse_variable_declaration(tokens):
     name = next(tokens)
