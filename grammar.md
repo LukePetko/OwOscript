@@ -1,0 +1,3 @@
+```ebnf
+statement = ident "=" expression ";"
+```

@@ -8,12 +8,14 @@ ast = []
 tokens = []
 
 with open("testfile.owo", "r") as f:
-    tokens = iter(lexer(f.read()))
+    tokens = lexer(f.read())
+
+print(tokens)
 
 # tokens = iter(lexer("vaw x = 5; // this is a comment\nvaw y = 10;"))
 # tokens = iter(lexer("vaw x = 5"))
 
-ast = AST(parse(tokens))
-
-semantic_analysis(ast)
-
+# ast = AST(parse(iter(tokens)))
+#
+# semantic_analysis(ast)
+#
