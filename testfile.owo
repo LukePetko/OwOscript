@@ -1,5 +1,6 @@
 vaw uwu = "UwU";
 vaw owo = "OwO";
+vaw aaa = 1 + 2 * 3;
 
 functiwoon uwu_owo(uwu, owo) {
     vaw owo_uwu = uwu + owo;
