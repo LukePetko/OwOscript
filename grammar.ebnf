@@ -1,27 +1,28 @@
 (* Non-terminals *)
 Program         = { Statement } ;
 Statement       = VariableDeclaration
-                | Assignment
+                | IdentifierStatement
                 | FunctionDeclaration
-                | FunctionCall
                 | PrintStatement
                 | ReturnStatement
                 | Comment ;
 
+IdentifierStatement = Identifier, NextIdentifierToken ;
+NextIdentifierToken = Assignment | FunctionCall ;
+
 VariableDeclaration = "vaw", Identifier "=", Expression, ";" ;
-Assignment          = Identifier, "=", Expression, ";" ;
+Assignment          = "=", Expression, ";" ;
 FunctionDeclaration = "functiwoon", Identifier, "(", [ Parameters ], ")", "{", { Statement }, "}" ;
-FunctionCall        = Identifier, "(", [ Arguments ], ")" ;
+FunctionCall        = "(", [ Arguments ], ")" ;
 PrintStatement      = "pwint", Expression, ";" ;
 ReturnStatement     = "wetuwn", Expression, ";" ;
 Comment             = "//", allCharacters, { allCharacters }, "\n" ;
 
 Parameters          = Identifier, { ",", Identifier } ;
 Arguments           = Expression, { ",", Expression } ;
-Expression          = SimpleExpression | FunctionCall ;
-SimpleExpression    = Term, { ("+" | "-"), Term } ;
+Expression          = Term, { ("+" | "-"), Term } ;
 Term                = Factor, { ("*" | "/"), Factor } ;
-Factor              = Number | Identifier | "(", Expression, ")" | String ;
+Factor              = Number | Identifier { FunctionCall } | "(", Expression, ")" | String ;
 
 Identifier          = letter, { letter | digit } ;
 Number              = digit, { digit } ;
