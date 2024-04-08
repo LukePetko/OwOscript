@@ -1,34 +1,35 @@
 (* Non-terminals *)
-Program         = { Statement } ;
-Statement       = VariableDeclaration
-                | IdentifierStatement
-                | FunctionDeclaration
-                | PrintStatement
-                | ReturnStatement
-                | Comment ;
+Program                 = { Statement } ;
+Statement               = VariableDeclaration
+                        | IdentifierStatement
+                        | FunctionDeclaration
+                        | PrintStatement
+                        | ReturnStatement
+                        | Comment ;
 
-IdentifierStatement = Identifier, NextIdentifierToken ;
-NextIdentifierToken = Assignment | FunctionCall ;
+IdentifierStatement     = Identifier, NextIdentifierToken ;
+NextIdentifierToken     = Assignment | FunctionCall ;
 
-VariableDeclaration = "vaw", Identifier "=", Expression, ";" ;
-Assignment          = "=", Expression, ";" ;
-FunctionDeclaration = "functiwoon", Identifier, "(", [ Parameters ], ")", "{", { Statement }, "}" ;
-FunctionCall        = "(", [ Arguments ], ")" ;
-PrintStatement      = "pwint", Expression, ";" ;
-ReturnStatement     = "wetuwn", Expression, ";" ;
-Comment             = "//", allCharacters, { allCharacters }, "\n" ;
+VariableDeclaration     = "vaw", Identifier "=", Expression, ";" ;
+Assignment              = "=", Expression, ";" ;
+FunctionDeclaration     = "functiwoon", Identifier, "(", [ Parameters ], ")", "{", { Statement }, "}" ;
+FunctionCall            = "(", [ Arguments ], ")" ;
+PrintStatement          = "pwint", Expression, ";" ;
+ReturnStatement         = "wetuwn", Expression, ";" ;
+Comment                 = "//", allCharacters, { allCharacters }, "\n" ;
 
-Parameters          = Identifier, { ",", Identifier } ;
-Arguments           = Expression, { ",", Expression } ;
-Expression          = Term, { ("+" | "-"), Term } ;
-Term                = Factor, { ("*" | "/"), Factor } ;
-Factor              = Number | Identifier { FunctionCall } | "(", Expression, ")" | String ;
+Parameters              = Identifier, { ",", Identifier } ;
+Arguments               = Expression, { ",", Expression } ;
+Expression              = Term, { ("+" | "-"), Term } ;
+Term                    = Factor, { ("*" | "/"), Factor } ;
+Factor                  = Number | Identifier { FunctionCall } | "(", Expression, ")" | String ;
 
-Identifier          = letter, { letter | digit } ;
-Number              = digit, { digit } ;
-String              = '"', { allCharacters - '"' }, '"' ;
+Identifier              = letter, { letter | digit } ;
+Number                  = digit, { digit } ;
+String                  = '"', { allCharacters - '"' }, '"' ;
 
 (* Terminals *)
-letter              = "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z" | "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z" ;
-digit               = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" ;
-allCharacters       = letter | digit | " " | "!" | "#" | "$" | "%" | "&" | "'" | "(" | ")" | "*" | "+" | "," | "-" | "." | "/" | ":" | ";" | "<" | "=" | ">" | "?" | "@" | "[" | "\\" | "]" | "^" | "_" | "`" | "{" | "|" | "}" | "~" ;
+letter                  = "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z" | "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z" ;
+digit                   = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" ;
+allCharacters           = letter | digit | " " | "!" | "#" | "$" | "%" | "&" | "'" | "(" | ")" | "*" | "+" | "," | "-" | "." | "/" | ":" | ";" | "<" | "=" | ">" | "?" | "@" | "[" | "\\" | "]" | "^" | "_" | "`" | "{" | "|" | "}" | "~" ;
+allCharactersMinusQuote = letter | digit | " " | "!" | "#" | "$" | "%" | "&" | "'" | "(" | ")" | "*" | "+" | "," | "-" | "." | "/" | ":" | ";" | "<" | "=" | ">" | "?" | "@" | "[" | "\\" | "]" | "^" | "_" | "`" | "{" | "|" | "}" | "~" ;

@@ -1,22 +1,47 @@
+from parser.classes import NumberLiteral, StringLiteral, VariableReference
+
+
 def parse_factor(tokens):
     token = next(tokens)
 
     if token[0] == "NUMBER":
-        return ("NUMBER", token[1])
-    elif token[0] == "LPAREN":
-        expr = parse_expr(tokens)
-        token = next(tokens)
-        assert token[0] == "RPAREN"
-        return expr
-    elif token[0] == "STRING":
-        return ("STRING", token[1])
-    elif token[0] == "IDENT":
-        return ("IDENT", token[1])
+        return NumberLiteral(token)
+    
+    if token[0] == "STRING":
+        return StringLiteral(token)
+
+    if token[0] == "IDENT":
+        return VariableReference(token)
+
+    if token[0] == "LPAREN":
+        return parse_expression(tokens)
 
 def parse_term(tokens):
-    left = parse_factor(tokens)
-    token = next(tokens)
     
+
+def parse_expression(tokens):
+    
+    
+
+    return next(tokens)
+
+def parse_print(tokens):
+    ident = next(tokens)
+
+    if ident[0] != "IDENT":
+        raise Exception("Expected identifier")
+    
+    assign = next(tokens)
+
+    if assign[0] != "ASSIGN":
+        raise Exception("Expected =")
+
+    semi = parse_expression(tokens)
+
+    print(semi)
+
+
+        
 
 def parse(tokens):
     ast = []
@@ -24,5 +49,5 @@ def parse(tokens):
     for token in tokens:
         if token[0] == "KEYWORD":
             match(token[1]):
-                case "pwint":
-                    pass
+                case "vaw":
+                    parse_print(tokens)

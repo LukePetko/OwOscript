@@ -5,7 +5,10 @@ token_specification = [
     ('STRING',   r'\".*?\"'),             # String
     ('EQ',       r'=='),                  # Equality
     ('ASSIGN',   r'='),                   # Assersion
-    ('OPERATOR', r'[\+\-\*/]'),           # Math operations
+    ('PLUS',     r'[\+]'),                # Plus
+    ('MINUS',    r'[\-]'),                # Minus
+    ('TIMES',    r'[\*]'),                # Times
+    ('DIVIDE',   r'[/]'),                 # Divide
     ('LPAREN',   r'\('),                  # Left Parenthesis
     ('RPAREN',   r'\)'),                  # Right Parenthesis
     ('LBRACE',   r'\{'),                  # Left curly brace
@@ -21,8 +24,7 @@ keyword_specification = [
     "vaw",
     "functiwoon",
     "wetuwn",
-    "if",
-    "ewse"
+    "pwint"
 ]
 
 tok_regex = '|'.join('(?P<%s>%s)' % pair for pair in token_specification)
