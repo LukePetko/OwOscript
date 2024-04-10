@@ -7,13 +7,18 @@ ast = []
 
 tokens = []
 
-with open("testfile.owo", "r") as f:
-    tokens = lexer(f.read())
+file = ""
 
-print(tokens)
+with open("testfile.owo", "r") as f:
+    file = f.read()
+    tokens = lexer(file)
+
+# print(tokens)
 
 # tokens = iter(lexer("vaw x = 5; // this is a comment\nvaw y = 10;"))
 # tokens = iter(lexer("vaw x = 5"))
+
+print(file)
 
 ast = AST(parse(iter(tokens)))
 #
